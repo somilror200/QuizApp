@@ -6,10 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.ProgressBar
-import android.widget.TextView
+import android.widget.*
 import androidx.core.content.ContextCompat
 import org.w3c.dom.Text
 
@@ -133,9 +130,12 @@ class QuizQuestionActivity : AppCompatActivity(), View.OnClickListener {
                 {
                     mCurrentPosition++
 
-                    when{
-                        mCurrentPosition <= mQuestionsList!!.size -> {setQuestion()}
+                    when
+                    {
+                        mCurrentPosition < mQuestionsList!!.size -> {setQuestion()}
+                        else -> { Toast.makeText(this, "You made it to the end", Toast.LENGTH_SHORT).show() }
                     }
+
                 }
                 else
                 {
