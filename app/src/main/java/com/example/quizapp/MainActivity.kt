@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val btnStart: Button = findViewById(R.id.btn_start)
-        val enteredName: EditText = findViewById(R.id.enterd_Name)
+        val enteredName: EditText = findViewById(R.id.entered_Name)
         btnStart.setOnClickListener{
 
             if(enteredName.text.isEmpty())

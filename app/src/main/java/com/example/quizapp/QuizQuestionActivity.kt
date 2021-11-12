@@ -5,11 +5,9 @@ import android.graphics.Color
 import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.core.content.ContextCompat
-import org.w3c.dom.Text
 
 class QuizQuestionActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -23,7 +21,7 @@ class QuizQuestionActivity : AppCompatActivity(), View.OnClickListener {
     private var textProgress: TextView? = null
     private var textQuestion: TextView? = null
     private var imageQuestion: ImageView? = null
-    private var submitbutton: Button? = null
+    private var submitButton: Button? = null
 
     private var textOptionOne: TextView? = null
     private var textOptionTwo: TextView? = null
@@ -39,7 +37,7 @@ class QuizQuestionActivity : AppCompatActivity(), View.OnClickListener {
         textProgress = findViewById(R.id.textProgress)
         textQuestion = findViewById(R.id.text_question)
         imageQuestion = findViewById(R.id.id_image)
-        submitbutton = findViewById(R.id.btn_submit)
+        submitButton = findViewById(R.id.btn_submit)
         mUserName = intent.getStringExtra(Constants.userName)
 
         textOptionOne = findViewById(R.id.option_one)
@@ -53,7 +51,7 @@ class QuizQuestionActivity : AppCompatActivity(), View.OnClickListener {
         textOptionTwo?.setOnClickListener(this)
         textOptionThree?.setOnClickListener(this)
         textOptionFour?.setOnClickListener(this)
-        submitbutton?.setOnClickListener(this)
+        submitButton?.setOnClickListener(this)
 
         setQuestion()
     }
@@ -63,7 +61,8 @@ class QuizQuestionActivity : AppCompatActivity(), View.OnClickListener {
         defaultOptionsView()
         val question: Question = mQuestionsList!![mCurrentPosition]
         progressBar?.progress = mCurrentPosition + 1
-        textProgress?.text = "${mCurrentPosition + 1}/${mQuestionsList!!.size}"
+        val textProgressString = "${mCurrentPosition + 1}/${mQuestionsList!!.size}"
+        textProgress?.text = textProgressString
         imageQuestion?.setImageResource(question.image)
         textQuestion?.text = question.question
         textOptionOne?.text = question.optionOne
@@ -71,13 +70,16 @@ class QuizQuestionActivity : AppCompatActivity(), View.OnClickListener {
         textOptionThree?.text = question.optionThree
         textOptionFour?.text = question.optionFour
 
+        val textFinish = "FINISH"
+        val textSubmit = "SUBMIT"
+
         if(mCurrentPosition == mQuestionsList!!.size)
         {
-            submitbutton?.text = "FINISH"
+            submitButton?.text = textFinish
         }
         else
         {
-            submitbutton?.text = "SUBMIT"
+            submitButton?.text = textSubmit
         }
 
     }
@@ -124,6 +126,10 @@ class QuizQuestionActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
+
+        val textFinish = "FINISH"
+        val textNextQuestion = "GO TO NEXT QUESTION"
+
         when(v?.id){
             R.id.option_one -> { textOptionOne?.let { selectedOption(it, 1) }}
             R.id.option_two -> { textOptionTwo?.let { selectedOption(it, 2) }}
@@ -163,11 +169,11 @@ class QuizQuestionActivity : AppCompatActivity(), View.OnClickListener {
 
                     if(mCurrentPosition == mQuestionsList!!.size - 1)
                     {
-                        submitbutton?.text = "FINISH"
+                        submitButton?.text = textFinish
                     }
                     else
                     {
-                        submitbutton?.text = "GO TO NEXT QUESTION"
+                        submitButton?.text = textNextQuestion
                     }
                     mSelectedOptionPosition = 0
                 }

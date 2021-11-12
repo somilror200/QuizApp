@@ -12,7 +12,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Quiz App!"
+        android:text="@string/quiz_app"
         android:textSize="25sp"
         android:layout_marginBottom="30dp"
         android:textStyle="bold"
@@ -36,7 +36,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Welcome"
+                android:text="@string/welcome"
                 android:textSize="30sp"
                 android:textStyle="bold"
                 android:gravity="center"
@@ -45,7 +45,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Please enter your name"
+                android:text="@string/please_enter_your_name"
                 android:textSize="16sp"
                 android:layout_margin="16dp"
                 android:textStyle="bold"
@@ -59,10 +59,10 @@
                 android:layout_marginTop="20dp">
 
                 <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/enterd_Name"
+                    android:id="@+id/entered_Name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Name"
+                    android:hint="@string/name"
                     android:inputType="textCapWords"
                     android:textColor="#363a43"
                     android:textColorHint="#7a8089"/>
@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:background="@color/design_default_color_primary"
-                android:text="Start"
+                android:text="@string/start"
                 android:textColor="@color/white"
                 android:textSize="18sp"/>
 
