@@ -129,53 +129,71 @@ class QuizQuestionActivity : AppCompatActivity(), View.OnClickListener {
 
         val textFinish = "FINISH"
         val textNextQuestion = "GO TO NEXT QUESTION"
+        val question = mQuestionsList?.get(mCurrentPosition)
 
-        when(v?.id){
-            R.id.option_one -> { textOptionOne?.let { selectedOption(it, 1) }}
-            R.id.option_two -> { textOptionTwo?.let { selectedOption(it, 2) }}
-            R.id.option_three -> { textOptionThree?.let { selectedOption(it, 3) }}
-            R.id.option_four -> { textOptionFour?.let { selectedOption(it, 4) }}
-            R.id.btn_submit -> {
-                if(mSelectedOptionPosition == 0)
-                {
-                    mCurrentPosition++
-
-                    when
+        if (question != null) {
+            when(v?.id)
+            {
+                R.id.option_one -> {
+                    if(!question.isAttempted)
                     {
-                        mCurrentPosition < mQuestionsList!!.size -> {setQuestion()}
-                        else -> {
-                            val intent = Intent(this, ResultActivity::class.java)
-                            intent.putExtra(Constants.userName, mUserName)
-                            intent.putExtra(Constants.correctAnswers, mCorrectAnswers)
-                            intent.putExtra(Constants.totalQuestions, mQuestionsList?.size)
-                            startActivity(intent)
-                            finish()
+                        textOptionOne?.let {
+                            selectedOption(it, 1)
+                    }}}
+                R.id.option_two -> {
+                    if(!question.isAttempted)
+                    {
+                        textOptionTwo?.let {
+                            selectedOption(it, 2)
+                    }}}
+                R.id.option_three -> {
+                    if(!question.isAttempted)
+                    {
+                        textOptionThree?.let {
+                            selectedOption(it, 3)
+                        }}}
+                R.id.option_four -> {
+                    if (!question.isAttempted)
+                    {
+                        textOptionFour?.let {
+                            selectedOption(it, 4)
+                    }}}
+                R.id.btn_submit -> {
+                    question.isAttempted = true
+                    if(mSelectedOptionPosition == 0)
+                    {
+                        mCurrentPosition++
+                        when
+                        {
+                            mCurrentPosition < mQuestionsList!!.size -> {setQuestion()}
+                            else -> {
+                                val intent = Intent(this, ResultActivity::class.java)
+                                intent.putExtra(Constants.userName, mUserName)
+                                intent.putExtra(Constants.correctAnswers, mCorrectAnswers)
+                                intent.putExtra(Constants.totalQuestions, mQuestionsList?.size)
+                                startActivity(intent)
+                                finish()
+                            }
                         }
-                    }
 
-                }
-                else
-                {
-                    val question = mQuestionsList?.get(mCurrentPosition)
-                    if(mSelectedOptionPosition != question!!.correctAnswer)
-                    {
-                        answerView(mSelectedOptionPosition, R.drawable.wrong_option_border_bg)
                     }
-                    else
-                    {
-                        mCorrectAnswers++
-                    }
-                    answerView(question.correctAnswer, R.drawable.correct_option_border_bg)
+                    else {
+                        if (mSelectedOptionPosition != question.correctAnswer) {
+                            answerView(mSelectedOptionPosition, R.drawable.wrong_option_border_bg)
+                        }
+                        else {
+                            mCorrectAnswers++
+                        }
+                        answerView(question.correctAnswer, R.drawable.correct_option_border_bg)
 
-                    if(mCurrentPosition == mQuestionsList!!.size - 1)
-                    {
-                        submitButton?.text = textFinish
+                        if (mCurrentPosition == mQuestionsList!!.size - 1) {
+                            submitButton?.text = textFinish
+                        } else
+                        {
+                            submitButton?.text = textNextQuestion
+                        }
+                        mSelectedOptionPosition = 0
                     }
-                    else
-                    {
-                        submitButton?.text = textNextQuestion
-                    }
-                    mSelectedOptionPosition = 0
                 }
             }
         }
