@@ -20,6 +20,7 @@
         android:textStyle="bold"/>
     
     <ImageView
+        android:paddingTop="80dp"
         android:id="@+id/trophy_image"
         android:layout_width="300dp"
         android:layout_height="300dp"
